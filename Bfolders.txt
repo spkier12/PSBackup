@@ -1,0 +1,12 @@
+\AppData\Roaming\Stormworks
+\AppData\Roaming\discord
+\Saved Games
+\AppData\LocalLow\SimKol
+\AppData\LocalLow\Vital Group Ltd
+\AppData\LocalLow\Altfuture
+\AppData\LocalLow\Hovgaard Games
+\AppData\LocalLow\Dry Cactus
+\AppData\LocalLow\Team17
+\AppData\Roaming\MySQL
+\AppData\Roaming\SpaceEngineers
+\AppData\Roaming\Spore
