@@ -2,6 +2,7 @@
 Import-Module -Name "$WorkingDirectory\Settings.psm1"
 
 $GetBackupPath = New-Object System.Collections.ArrayList
+[string]$CustomFolder = "unknownBackup"
 
 # Restores data from the backup folders and place the .zip folders back into their original locations
 function RestoreDataRP {
@@ -18,7 +19,7 @@ function RestoreDataRP {
             Write-Host "Copying Folder: $GDrive$NameFolder2 to $PathOfRestore$NameFolder2"
 
             # Extract the .zip file into the restore path
-            Expand-Archive -Path "$GDrive$NameFolder2.zip" -Destination "$PathOfRestore" -Force
+            Expand-Archive -Path "$GDrive\$CustomFolder\$NameFolder2.zip" -Destination "$PathOfRestore" -Force
 
             # Remove the path from array so it wont re-try agen
             $GetBackupPath.Remove($item)
@@ -31,10 +32,18 @@ function RestoreDataRP {
     }
 }
 
+# Read what directory restorepoint to get and read the backup list to get the restore path
 function GetRestoreRP {
+    
+    # If input is null then revert to default backup location
+    [string]$CustomFolder = Read-Host "`n Enter name of the folderName to restore"
+    if ($CustomFolder -eq "") {$CustomFolder = "unknownBackup"}
+
+    # Read the content and split the lines into array
     $GetContent = Get-Content $BackupList
     $SplitContent = $GetContent.Split("`n")
 
+    # Get the path and add it to variable
     foreach ($item in $SplitContent) {
         $GetBackupPath.Add("$Ufolders$item")
     }
